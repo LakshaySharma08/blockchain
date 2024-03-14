@@ -27,9 +27,9 @@ if __name__ == '__main__':
 
     lastHash = BlockhainUtils.hash(blockchain.blocks[-1].payload()).hexdigest()
     blockCount = blockchain.blocks[-1].blockCount + 1
-    blockOne = forger.createBlock(coveredTransaction,lastHash, blockCount )
+    blockOne = Block(coveredTransaction,lastHash, forger.publicKeyString() ,blockCount )
+
     blockchain.addBlock(blockOne)
-    pool.removeFromPool(blockOne.transactions)
 
     transaction = alice.createTransaction(bob.publicKeyString(), 5, 'TRANSFER')
 
@@ -40,10 +40,9 @@ if __name__ == '__main__':
 
     lastHash = BlockhainUtils.hash(blockchain.blocks[-1].payload()).hexdigest()
     blockCount = blockchain.blocks[-1].blockCount + 1
-    blockTwo = forger.createBlock(coveredTransaction,lastHash,blockCount )
+    blockTwo = Block(coveredTransaction,lastHash, forger.publicKeyString() ,blockCount )
 
     blockchain.addBlock(blockTwo)
-    pool.removeFromPool(blockTwo.transactions)
 
     transaction = alice.createTransaction(bob.publicKeyString(), 5, 'TRANSFER')
 
